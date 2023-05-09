@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form Example</title>
+	<link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="contact_container">
+            <div class="container-1">
+	
+</div>
+<div class="container-2">
+    <div class="information_container">
+    <h3 class="title">welcome in nike shop</h3>
+    <p>sign in to use the platform</p>
+    </div>
+    <form id="myForm">
+		<label for="name" label="name1">Name:</label>
+        <br>
+		<input type="text" id="name" name="name" required>
+<br>
+		<label for="email" id="email_label">Email:</label>
+        <br>
+		<input type="email" id="email" name="email" required>
+<br>
+		<label for="message" id="message_label">Message:</label>
+        <br>
+		<input type="text" id="message" name="message" required>
+<br>
+		<button type="submit">Submit</button>
+    <p class="or">or</p>
+	</form>
+</div>
+</div>
+</div>
+	<script>
+        const name1 = document.getElementById("name1")
+        const nameentry = document.getElementById("name")
+        const emaillabel = document.getElementById("email_label")
+        const emailentry = document.getElementById("email")
+        const message_label =document.getElementById("message_label")
+        const messageentry = document.getElementById("message")
+        nameentry.onkeyup=function(){
+        name1.style.top="-1px";
+        }
+		const form = document.getElementById('myForm');
+		form.addEventListener('submit', function(event) {
+			event.preventDefault();
+			const data = new FormData(form);
+			const values = Object.fromEntries(data.entries());
+			saveToExcel(values);
+			form.reset();
+		});
+
+		function saveToExcel(data) {
+			const wb = XLSX.utils.book_new();
+			const ws = XLSX.utils.json_to_sheet([data]);
+			XLSX.utils.book_append_sheet(wb, ws, 'Data');
+			XLSX.writeFile(wb, 'data.xlsx');
+		}
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</body>
+</html>
